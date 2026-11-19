@@ -1,0 +1,24 @@
+# The main pipeline for nyc_taxi_pipeline
+
+resources:
+  pipelines:
+    nyc_taxi_pipeline_etl:
+      name: nyc_taxi_pipeline_etl
+      catalog: ${var.catalog}
+      schema: ${var.schema}
+      serverless: true
+      root_path: "../src/pipeline"
+
+      libraries:
+        - file:
+            path: ../src/pipeline/bronze.py
+        - file:
+            path: ../src/pipeline/silver.py
+        - file:
+            path: ../src/pipeline/gold.py
+
+      # environment:
+        # dependencies:
+        #   # We include every dependency defined by pyproject.toml by defining an editable environment
+        #   # that points to the folder where pyproject.toml is deployed.
+        #   - --editable ${workspace.file_path}
