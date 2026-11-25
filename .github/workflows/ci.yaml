@@ -29,12 +29,11 @@ jobs:
           cache: "pip"
 
       # Step 3: Install dependencies
-      - name: Install project
+      - name: Install project and dev dependencies
         run: |
-          pwd
-          ls -la
           python -m pip install --upgrade pip
-          pip install -e ".[dev]"
+          pip install -e .
+          pip install --group dev
 
       # Step 4: Run Python linting
       - name: Run Ruff lint
