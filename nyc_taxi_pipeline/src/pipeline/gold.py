@@ -45,3 +45,4 @@ def gold_payment_analysis():
     )
     df = df.drop("payment_type")
     return df
+
