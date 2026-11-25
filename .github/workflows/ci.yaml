@@ -14,7 +14,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./databricks-porject-nyc/nyc_taxi_pipeline
+        working-directory: ./nyc_taxi_pipeline
 
     steps:
       # Step 1: Checkout repository
