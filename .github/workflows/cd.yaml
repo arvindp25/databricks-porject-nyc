@@ -14,6 +14,9 @@ jobs:
   deploy-dev:
     name: Deploy Bundle to Dev
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./nyc_taxi_pipeline
     environment: dev
     steps:
       - name: Checkout Code
