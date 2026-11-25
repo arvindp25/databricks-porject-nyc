@@ -1,0 +1,36 @@
+name: CD - Deploy to Dev Environment
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: cd-dev
+  cancel-in-progress: false
+
+jobs:
+  deploy-dev:
+    name: Deploy Bundle to Dev
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./nyc_taxi_pipeline
+    environment: dev
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Databricks CLI
+        uses: databricks/setup-cli@v0.2
+
+      - name: Deploy Databricks Asset Bundle (Dev)
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          DATABRICKS_CLIENT_ID: ${{ secrets.DATABRICKS_CLIENT_ID }}
+          DATABRICKS_CLIENT_SECRET: ${{ secrets.DATABRICKS_CLIENT_SECRET }}
+        run: |
+          echo "🚀 Deploying NYC Taxi Pipeline to Dev workspace..."
+          databricks bundle deploy -t dev
