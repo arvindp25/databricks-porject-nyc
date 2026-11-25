@@ -10,7 +10,7 @@ dev = [
     "pytest",
     "ruff",
     "databricks-dlt",
-    "databricks-connect>=16.4,<16.5",
+    "databricks-connect>=15.0,<16.5",
     "ipykernel",
 ]
 
